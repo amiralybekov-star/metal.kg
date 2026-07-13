@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: "Контакты | ИП Райымжанов — Производство металлоизделий в Бишкеке",
@@ -9,7 +8,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Контакты ИП Райымжанов — Металлоизделия Бишкек",
     description: "Звоните или пишите нам: +996 779 592 026, +996 706 646 264. Самовывоз со склада в Бишкеке.",
-    images: [{ url: "/images/map.jpg" }],
   },
 };
 
@@ -74,18 +72,7 @@ export default function ContactsPage() {
         {/* Форма обратной связи */}
         <div className="bg-white p-10 rounded-3xl shadow-sm">
           <h2 className="text-3xl font-semibold mb-6">Напишите нам</h2>
-          <form className="space-y-6">
-            <input type="text" placeholder="Ваше имя" className="w-full px-6 py-4 rounded-2xl border focus:outline-none focus:border-blue-600" required />
-            <input type="tel" placeholder="Телефон" className="w-full px-6 py-4 rounded-2xl border focus:outline-none focus:border-blue-600" required />
-            <textarea placeholder="Ваше сообщение (можно указать, какие изделия интересуют)" rows={5} className="w-full px-6 py-4 rounded-2xl border focus:outline-none focus:border-blue-600" required></textarea>
-            
-            <button 
-              type="submit" 
-              className="w-full bg-blue-700 hover:bg-blue-800 text-white py-5 rounded-3xl font-semibold text-lg transition-colors"
-            >
-              Отправить заявку
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </div>
 
@@ -93,13 +80,16 @@ export default function ContactsPage() {
       <div className="mt-16">
         <h3 className="text-2xl font-semibold mb-6 text-center">Как нас найти</h3>
         <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-          <Image 
-            src="/images/map.jpg" 
-            alt="Карта расположения ИП Райымжанов — Профсоюзная 2/1, Бишкек"
-            width={1200}
-            height={500}
-            className="w-full h-[500px] object-cover"
-          />
+          <iframe
+            src="https://www.google.com/maps?q=Профсоюзная+2/1,+Бишкек,+Кыргызстан&output=embed"
+            width="100%"
+            height="500"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-[500px]"
+          ></iframe>
           <div className="absolute bottom-6 left-6 bg-white px-6 py-4 rounded-2xl shadow-lg">
             <p className="font-semibold">Профсоюзная 2/1, Бишкек</p>
           </div>
