@@ -38,7 +38,14 @@ export default function ProductCard({ product }: { product: ProductCardProps }) 
             </span>
             
             <button 
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(
+                  `https://wa.me/996706646264?text=${encodeURIComponent(`Здравствуйте! Хочу узнать цену на: ${product.name}`)}`,
+                  '_blank'
+                );
+              }}
               className="bg-blue-700 text-white px-6 py-2.5 rounded-2xl text-sm font-medium hover:bg-blue-800 transition-colors"
             >
               Узнать цену
