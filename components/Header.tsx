@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Header() {
@@ -11,12 +12,16 @@ export default function Header() {
         
         {/* Логотип */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl font-bold flex-shrink-0">
-            Р
-          </div>
-          <div className="leading-tight">
-            <div className="font-bold text-xl md:text-2xl">ИП Райымжанов</div>
-            <div className="text-[10px] md:text-xs text-slate-500 -mt-0.5">
+          <Image 
+            src="/logo.png" 
+            alt="ИП Райымжанов" 
+            width={160} 
+            height={160} 
+            className="h-12 md:h-14 w-auto object-contain flex-shrink-0"
+            priority
+          />
+          <div className="leading-tight hidden sm:block">
+            <div className="text-[10px] md:text-xs text-slate-500">
               Металлопрокат • Производство
             </div>
           </div>
