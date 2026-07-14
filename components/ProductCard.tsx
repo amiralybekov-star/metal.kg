@@ -10,11 +10,12 @@ type ProductCardProps = {
   image: string;
   description: string;
   unit?: string;
+  category: string;
 };
 
 export default function ProductCard({ product }: { product: ProductCardProps }) {
   return (
-    <Link href={`/catalog/${product.id}`} className="block group">
+    <Link href={`/catalog/${product.category}`} className="block group">
       <div className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col cursor-pointer">
         <div className="relative h-56 overflow-hidden">
           <Image 

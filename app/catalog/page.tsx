@@ -84,6 +84,7 @@ export default function CatalogPage() {
                   image: product.image,
                   description: product.description || '',
                   unit: product.unit,
+                  category: product.category,
                 }} 
               />
             ))}

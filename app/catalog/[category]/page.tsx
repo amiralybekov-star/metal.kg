@@ -13,7 +13,7 @@ const categoryNames: Record<string, string> = {
 };
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
-  const { category } = await params;   // ← Вот главное исправление
+  const { category } = await params;
   
   const filteredProducts = products.filter(p => p.category === category);
   const title = categoryNames[category] || "Категория";
@@ -43,6 +43,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 image: product.image,
                 description: product.description || '',
                 unit: product.unit,
+                category: product.category,
               }} 
             />
           ))}
