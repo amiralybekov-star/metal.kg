@@ -1,19 +1,16 @@
 {
-  "name": "ip-raimzhanov",
+  "name": "metal-kg",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.2.0",
-    "@fortawesome/react-fontawesome": "^3.3.1",
     "next": "16.2.4",
-    "next-sitemap": "^4.2.3",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -26,5 +23,6 @@
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Сайт ИП Райымжанов — производство металлоизделий в Бишкеке (metal.kg)"
 }

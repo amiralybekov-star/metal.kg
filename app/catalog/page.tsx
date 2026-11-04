@@ -1,110 +1,89 @@
-'use client';
-import { useState } from 'react';
-import ProductCard from '@/components/ProductCard';
-import { products } from '@/data/products';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import CatalogClient from '@/components/CatalogClient';
+import WhatsAppLink from '@/components/WhatsAppLink';
+import { products } from '@/data/products';
+import { navCategories } from '@/data/catalog';
+import { SITE_URL } from '@/data/site';
+import { formatPrice } from '@/data/products';
 
-const categories = [
-  { id: 'all', name: 'Все товары' },
-  { id: 'washer', name: 'Анкерные шайбы' },
-  { id: 'bath', name: 'Ванночки для сварки' },
-  { id: 'anchor', name: 'Анкерные болты' },
-  { id: 'tie', name: 'Тайроты' },
-  { id: 'mufta', name: 'Муфты для арматуры' },
-  { id: 'foundation', name: 'Закладные детали' },
-  { id: 'stand', name: 'Стойки телескопические' },
-];
+export const metadata: Metadata = {
+  title: 'Каталог продукции — анкерные болты, шайбы, ванночки, тайроты | ИП Райымжанов, Бишкек',
+  description:
+    'Каталог металлоизделий собственного производства в Бишкеке: анкерные болты и шайбы, ванночки для сварки, тайроты, муфты для арматуры, закладные детали, телескопические стойки. Цены и наличие.',
+  alternates: { canonical: `${SITE_URL}/catalog` },
+  openGraph: {
+    title: 'Каталог металлоизделий — ИП Райымжанов, Бишкек',
+    description:
+      'Анкерные болты, шайбы АШ, ванночки для сварки, тайроты, муфты, закладные детали и стойки — напрямую от производителя.',
+    url: `${SITE_URL}/catalog`,
+  },
+};
 
 export default function CatalogPage() {
-  const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
-
-  const filtered = products.filter(p => 
-    (activeCategory === 'all' || p.category === activeCategory) &&
-    (p.name.toLowerCase().includes(search.toLowerCase()) || 
-     p.description?.toLowerCase().includes(search.toLowerCase()))
-  );
+  const foundation = products.find((p) => p.category === 'foundation');
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4">Каталог продукции</h1>
-        <p className="text-xl text-slate-600">
-          Анкерные шайбы • Ванночки • Тайроты • Анкерные болты • Закладные детали • Муфты для арматуры
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Каталог продукции</h1>
+        <p className="text-lg sm:text-xl text-slate-600">
+          Анкерные шайбы • Ванночки • Тайроты • Анкерные болты • Закладные детали • Муфты для
+          арматуры
         </p>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-10">
         {/* ===== САЙДБАР ===== */}
-        <div className="lg:w-72 flex-shrink-0">
-          <div className="sticky top-8 bg-white border border-slate-200 rounded-3xl p-6">
-            <h3 className="font-semibold text-lg mb-5">Категории</h3>
-            
-            <div className="flex flex-col gap-1">
-              {categories.map(cat => (
+        <aside className="lg:w-72 flex-shrink-0">
+          <div className="sticky top-28 bg-white border border-slate-200 rounded-3xl p-6">
+            <h2 className="font-semibold text-lg mb-5">Категории</h2>
+
+            <nav aria-label="Категории каталога" className="flex flex-col gap-1">
+              <Link
+                href="/catalog"
+                aria-current="page"
+                className="px-5 py-3.5 rounded-2xl bg-blue-600 text-white font-medium"
+              >
+                Все товары
+              </Link>
+              {navCategories.map((category) => (
                 <Link
-                  key={cat.id}
-                  href={cat.id === 'all' ? '/catalog' : `/catalog/${cat.id}`}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-5 py-3.5 rounded-2xl transition-all text-left ${
-                    activeCategory === cat.id 
-                      ? 'bg-blue-600 text-white font-medium' 
-                      : 'hover:bg-slate-100'
-                  }`}
+                  key={category.id}
+                  href={`/catalog/${category.id}`}
+                  className="px-5 py-3.5 rounded-2xl hover:bg-slate-100 transition-all"
                 >
-                  {cat.name}
+                  {category.name}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
-        </div>
+        </aside>
 
         {/* ===== ОСНОВНОЙ КОНТЕНТ ===== */}
         <div className="flex-1">
-          <div className="mb-8">
-            <input
-              type="text"
-              placeholder="Поиск по названию..."
-              className="w-full px-6 py-4 rounded-3xl border focus:outline-none focus:border-blue-600 text-lg"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map(product => (
-              <ProductCard 
-                key={product.id} 
-                product={{
-                  id: product.id,
-                  name: product.name,
-                  price: product.pricePerKg 
-                    ? `${product.priceCash} сом/кг` 
-                    : product.priceCash || product.price || 'По запросу',
-                  image: product.image,
-                  description: product.description || '',
-                  unit: product.unit,
-                  category: product.category,
-                }} 
-              />
-            ))}
-          </div>
-
-          {filtered.length === 0 && (
-            <p className="text-center text-xl py-20 text-slate-500">Товары не найдены</p>
-          )}
+          <CatalogClient products={products} />
         </div>
       </div>
 
       {/* Блок с ценой на закладные детали */}
-      <div className="mt-20 bg-slate-50 border border-slate-200 rounded-3xl p-8 text-center">
-        <h3 className="text-2xl font-semibold mb-4">Закладные детали</h3>
+      <div className="mt-16 bg-slate-50 border border-slate-200 rounded-3xl p-8 text-center">
+        <h2 className="text-2xl font-semibold mb-4">Закладные детали</h2>
         <p className="text-3xl font-bold text-emerald-600">
-          130 сом/кг <span className="text-base font-normal text-slate-500">(наличные)</span>
+          {foundation ? formatPrice(foundation) : '130 сом/кг'}{' '}
+          <span className="text-base font-normal text-slate-500">(наличные)</span>
         </p>
         <p className="text-xl text-slate-600 mt-2">
-          Бартер — <span className="font-semibold">145 сом/кг</span>
+          Бартер — <span className="font-semibold">{foundation?.priceBarter ?? 145} сом/кг</span>
         </p>
+        <WhatsAppLink
+          source="catalog_foundation_price"
+          productName="Закладные детали"
+          text="Здравствуйте! Хочу узнать цену на закладные детали."
+          className="inline-block mt-6 bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3.5 rounded-2xl transition-colors"
+        >
+          Запросить расчёт
+        </WhatsAppLink>
       </div>
     </div>
   );

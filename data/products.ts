@@ -1,7 +1,9 @@
+import type { CategoryId } from './catalog';
+
 export type Product = {
   id: number;
   name: string;
-  category: 'washer' | 'bath' | 'anchor' | 'tie' | 'stand' | 'other' | 'mufta';
+  category: CategoryId;
   diameter?: string;
   size?: string;
   priceCash?: number;
@@ -278,7 +280,7 @@ export const products: Product[] = [
   {
     id: 17,
     name: "Закладные детали",
-    category: "other",
+    category: "foundation",
     unit: "кг",
     description: "130 сом/кг (наличные) | 145 сом/кг (бартер)",
     priceCash: 130,
@@ -288,3 +290,15 @@ export const products: Product[] = [
     image: "/images/products/zakladnye-detali.jpg"
   },
 ];
+
+/** Цена для карточки: число или «По запросу». */
+export function formatPrice(product: Product): string {
+  if (product.pricePerKg) return `${product.priceCash} сом/кг`;
+  if (product.priceCash) return `${product.priceCash}`;
+  if (product.price) return `${product.price}`;
+  return "По запросу";
+}
+
+export function productsByCategory(category: string): Product[] {
+  return products.filter((p) => p.category === category);
+}

@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# metal.kg — сайт ИП Райымжанов
 
-## Getting Started
+Сайт производителя металлоизделий в Бишкеке: анкерные болты и шпильки, анкерные шайбы АШ,
+ванночки для сварки, тайроты, муфты для арматуры, закладные детали, телескопические стойки.
 
-First, run the development server:
+Прод: [metal.kg](https://metal.kg) · Хостинг: Vercel · Код: этот репозиторий (ветка `main` деплоится автоматически).
+
+## Стек
+
+- **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript**
+- **Tailwind CSS 4** (через `@tailwindcss/postcss`)
+- Шрифт Inter подключается через `next/font/google` (без внешних `<link>`)
+- Аналитика: gtag.js + Google Ads (`AW-18302346521`)
+
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Проверки перед пушем:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run typecheck  # tsc --noEmit
+npm run lint       # eslint
+npm run build      # прод-сборка
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Переменные окружения
 
-## Learn More
+| Переменная | Назначение | По умолчанию |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Базовый URL для canonical, OG и sitemap | `https://metal.kg` |
 
-To learn more about Next.js, take a look at the following resources:
+Скопируйте `.env.example` в `.env.local` и поменяйте значение, если сайт открывается по другому домену
+(например, на preview-деплое Vercel).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Структура
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  layout.tsx              метаданные, JSON-LD, gtag, шапка/подвал
+  page.tsx                главная
+  catalog/page.tsx        каталог (серверная страница + клиентский поиск)
+  catalog/[category]/     страницы категорий: SEO-метаданные, хлебные крошки, JSON-LD
+  services/page.tsx       услуги
+  about/page.tsx          о компании
+  contacts/page.tsx       контакты, форма, карта
+  sitemap.ts, robots.ts   генерируются на встроенных средствах Next
+  not-found.tsx           404
+components/
+  ProductCard.tsx         карточка товара (валидная разметка, без кнопки внутри ссылки)
+  CatalogClient.tsx       поиск по каталогу
+  WhatsAppLink.tsx        ссылка на WhatsApp + событие в gtag
+  PhoneLink.tsx           tel:-ссылка + событие в gtag
+  WhatsAppIcon.tsx        иконка WhatsApp (inline SVG)
+data/
+  products.ts             товары
+  catalog.ts              категории, названия, SEO-описания
+  contacts.ts             телефоны, адрес, ссылки WhatsApp и карты
+  site.ts                 домен и название сайта
+lib/analytics.ts          отправка событий и конверсий в Google Ads
+```
 
-## Deploy on Vercel
+## Как править контент
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Товар** — `data/products.ts`. `category` должен совпадать с `id` из `data/catalog.ts`,
+  иначе товар не попадёт на страницу категории. `priceCash` — цена за наличные,
+  `priceBarter` — по бартеру, `pricePerKg` — цена за килограмм.
+- **Категория** — `data/catalog.ts`: `id`, `name`, `description` (идёт в title/description страницы).
+  Страницы категорий и sitemap строятся из этого списка автоматически.
+- **Телефоны, адрес** — `data/contacts.ts`. Номер WhatsApp задаётся один раз в `WHATSAPP_NUMBER`.
+- **Фото** — `public/images/products/`. Сейчас у товаров одной категории общая картинка;
+  для доверия и для картинок в поиске лучше заменить на реальные фото.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Конверсии Google Ads
+
+Клики по WhatsApp и телефонам отправляют события `whatsapp_click` / `phone_click`.
+Чтобы они засчитывались как конверсии:
+
+1. В Google Ads создайте действия-конверсии «Клик по WhatsApp» и «Звонок».
+2. Возьмите метки вида `AW-18302346521/AbC-D_efGhIjKl`.
+3. Вставьте их в `lib/analytics.ts` → `CONVERSION_LABELS`.
+
+Пока метки пустые, события уходят в gtag, но конверсии в Ads не засчитываются.
+
+## Деплой
+
+Пуш в `main` → Vercel собирает и выкатывает автоматически. После изменения домена
+перегенерируйте sitemap (он собирается на билде) и отправьте его в Google Search Console:
+`https://metal.kg/sitemap.xml`.
