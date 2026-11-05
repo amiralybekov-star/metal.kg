@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/Header';
@@ -8,10 +8,14 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import { SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
 import { ADDRESS, PHONES, WHATSAPP_NUMBER } from '@/data/contacts';
 
-const inter = Inter({
-  subsets: ['cyrillic', 'latin'],
-  weight: ['400', '500', '600', '700'],
+// Inter, ужатый до кириллицы + латиницы (120 КБ, оси 100–900).
+// Свой файл вместо next/font/google: сборка на Vercel падала на резолве
+// внутреннего модуля Google-шрифтов под Turbopack, плюс нет внешнего запроса.
+const inter = localFont({
+  src: './fonts/inter-var.woff2',
+  weight: '100 900',
   display: 'swap',
+  fallback: ['system-ui', 'Segoe UI', 'Arial', 'sans-serif'],
 });
 
 const TITLE = 'Металлоизделия в Бишкеке от производителя — анкерные болты и шайбы';
