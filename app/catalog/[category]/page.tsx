@@ -23,12 +23,14 @@ export async function generateMetadata({ params }: CategoryParams): Promise<Meta
 
   const url = `${SITE_URL}/catalog/${cat.id}`;
 
+  const title = `${cat.seoTitle} | ИП Райымжанов`;
+
   return {
-    title: `${cat.seoTitle} | ИП Райымжанов`,
+    title,
     description: cat.seoDescription,
     alternates: { canonical: url },
     openGraph: {
-      title: cat.seoTitle,
+      title,
       description: cat.seoDescription,
       url,
       type: 'website',
@@ -88,7 +90,11 @@ export default async function CategoryPage({ params }: CategoryParams) {
       </nav>
 
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{cat.name}</h1>
-      <p className="text-lg text-slate-600 max-w-3xl mb-10">{cat.description}</p>
+      <p className="text-lg text-slate-600 max-w-3xl mb-4">{cat.description}</p>
+      <p className="inline-flex flex-wrap items-center gap-2 text-sm text-slate-600 bg-slate-100 rounded-2xl px-4 py-2 mb-10">
+        <span className="font-medium text-slate-900">Типоразмеры:</span>
+        {cat.range}
+      </p>
 
       {items.length > 0 ? (
         <>
@@ -106,6 +112,26 @@ export default async function CategoryPage({ params }: CategoryParams) {
             Позвоните или напишите — изготовим {cat.accusative} по вашим размерам.
           </p>
         </div>
+      )}
+
+      {/* Для категорий с одной позицией на заказ таблица из одной строки бесполезна:
+          показываем диапазон, который реально изготавливаем */}
+      {items.length === 1 && !hasSizes && (
+        <section className="mt-14 max-w-3xl">
+          <h2 className="text-2xl font-semibold mb-4">Что можем изготовить</h2>
+          <p className="text-slate-600 mb-4">
+            Позиция изготавливается под заказ: {cat.range}. Цена зависит от размеров,
+            марки стали и объёма партии — пришлите чертёж или размеры, посчитаем в течение дня.
+          </p>
+          <WhatsAppLink
+            source={`category_${cat.id}_sizes`}
+            text={`Здравствуйте! Нужны ${cat.accusative}. Подскажите цену под мои размеры.`}
+            className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-4 rounded-2xl transition-colors"
+          >
+            <WhatsAppIcon className="w-5 h-5" />
+            Уточнить размер и цену
+          </WhatsAppLink>
+        </section>
       )}
 
       {/* Таблица характеристик — то, что ищут запросами «АШ-8 размеры», «ванночка д32» */}

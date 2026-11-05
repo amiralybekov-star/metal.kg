@@ -27,21 +27,13 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   applicationName: SITE_NAME,
-  keywords: [
-    'анкерные болты Бишкек',
-    'анкерные шайбы Бишкек',
-    'ванночки для сварки Бишкек',
-    'тайроты Бишкек',
-    'металлопрокат Бишкек',
-    'плазменная резка Бишкек',
-  ],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'ru_KG',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: 'Металлоизделия в Бишкеке — производство и цены | ИП Райымжанов',
+    title: TITLE,
     description: DESCRIPTION,
     images: [
       {
@@ -78,6 +70,13 @@ const jsonLd = {
       image: `${SITE_URL}/og-image.jpg`,
       logo: `${SITE_URL}/logo-512.png`,
       telephone: PHONES[0].tel,
+      contactPoint: PHONES.map((phone) => ({
+        '@type': 'ContactPoint',
+        telephone: phone.tel,
+        contactType: 'sales',
+        areaServed: 'KG',
+        availableLanguage: ['ru'],
+      })),
       priceRange: 'сом',
       currenciesAccepted: 'KGS',
       paymentAccepted: 'Наличные, бартер',

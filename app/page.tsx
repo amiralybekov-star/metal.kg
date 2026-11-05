@@ -119,7 +119,7 @@ export default function Home() {
             </div>
             <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
               <h4 className="font-semibold text-lg sm:text-xl mb-2">Выгодные цены</h4>
-              <p className="text-slate-600 text-[15px] sm:text-base">Прямые поставки без посредников — одни из лучших цен в Кыргызстане.</p>
+              <p className="text-slate-600 text-[15px] sm:text-base">Цена формируется на производстве — без наценки посредников и перекупщиков.</p>
             </div>
             <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
               <h4 className="font-semibold text-lg sm:text-xl mb-2">Быстрые сроки</h4>
@@ -129,13 +129,13 @@ export default function Home() {
 
           <p className="text-[17px] sm:text-lg leading-relaxed mb-10">
             Мы обеспечиваем строительные компании, подрядчиков и частных застройщиков
-            качественным крепежом по всей территории Кыргызстана. Все изделия соответствуют
-            требованиям ГОСТ и проходят строгий контроль качества.
+            крепежом по всей территории Кыргызстана. Стандартные изделия изготавливаем
+            по ГОСТ, нестандартные — по чертежам и размерам заказчика.
           </p>
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Условия работы</h3>
           <ul className="space-y-3 text-[17px] sm:text-lg mb-12">
-            <li><strong aria-hidden="true">✅</strong> Полное соответствие ГОСТ и ТУ</li>
+            <li><strong aria-hidden="true">✅</strong> Изготовление по ГОСТ и ТУ, нестандарт — по чертежу</li>
             <li><strong aria-hidden="true">✅</strong> Изготовление по вашим чертежам и размерам</li>
             <li><strong aria-hidden="true">✅</strong> Оптовые поставки крупным объектам</li>
             <li><strong aria-hidden="true">✅</strong> Самовывоз со склада в Бишкеке (Профсоюзная 2/1)</li>

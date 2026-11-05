@@ -23,7 +23,7 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
         {/* Логотип */}
-        <Link href="/" className="flex items-center gap-3 min-w-0">
+        <Link href="/" aria-label="ИП Райымжанов — на главную" className="flex items-center gap-3 min-w-0">
           <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl font-bold flex-shrink-0">
             Р
           </div>

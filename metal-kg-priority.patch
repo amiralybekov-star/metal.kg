@@ -1,0 +1,264 @@
+diff --git a/app/catalog/[category]/page.tsx b/app/catalog/[category]/page.tsx
+index 1dc57d9..16de5bf 100644
+--- a/app/catalog/[category]/page.tsx
++++ b/app/catalog/[category]/page.tsx
+@@ -23,12 +23,14 @@ export async function generateMetadata({ params }: CategoryParams): Promise<Meta
+ 
+   const url = `${SITE_URL}/catalog/${cat.id}`;
+ 
++  const title = `${cat.seoTitle} | ИП Райымжанов`;
++
+   return {
+-    title: `${cat.seoTitle} | ИП Райымжанов`,
++    title,
+     description: cat.seoDescription,
+     alternates: { canonical: url },
+     openGraph: {
+-      title: cat.seoTitle,
++      title,
+       description: cat.seoDescription,
+       url,
+       type: 'website',
+@@ -88,7 +90,11 @@ export default async function CategoryPage({ params }: CategoryParams) {
+       </nav>
+ 
+       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{cat.name}</h1>
+-      <p className="text-lg text-slate-600 max-w-3xl mb-10">{cat.description}</p>
++      <p className="text-lg text-slate-600 max-w-3xl mb-4">{cat.description}</p>
++      <p className="inline-flex flex-wrap items-center gap-2 text-sm text-slate-600 bg-slate-100 rounded-2xl px-4 py-2 mb-10">
++        <span className="font-medium text-slate-900">Типоразмеры:</span>
++        {cat.range}
++      </p>
+ 
+       {items.length > 0 ? (
+         <>
+@@ -108,6 +114,26 @@ export default async function CategoryPage({ params }: CategoryParams) {
+         </div>
+       )}
+ 
++      {/* Для категорий с одной позицией на заказ таблица из одной строки бесполезна:
++          показываем диапазон, который реально изготавливаем */}
++      {items.length === 1 && !hasSizes && (
++        <section className="mt-14 max-w-3xl">
++          <h2 className="text-2xl font-semibold mb-4">Что можем изготовить</h2>
++          <p className="text-slate-600 mb-4">
++            Позиция изготавливается под заказ: {cat.range}. Цена зависит от размеров,
++            марки стали и объёма партии — пришлите чертёж или размеры, посчитаем в течение дня.
++          </p>
++          <WhatsAppLink
++            source={`category_${cat.id}_sizes`}
++            text={`Здравствуйте! Нужны ${cat.accusative}. Подскажите цену под мои размеры.`}
++            className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-4 rounded-2xl transition-colors"
++          >
++            <WhatsAppIcon className="w-5 h-5" />
++            Уточнить размер и цену
++          </WhatsAppLink>
++        </section>
++      )}
++
+       {/* Таблица характеристик — то, что ищут запросами «АШ-8 размеры», «ванночка д32» */}
+       {items.length > 1 && hasSizes && (
+         <section className="mt-14">
+diff --git a/app/layout.tsx b/app/layout.tsx
+index 8bf5401..9c1328c 100644
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -27,21 +27,13 @@ export const metadata: Metadata = {
+   title: TITLE,
+   description: DESCRIPTION,
+   applicationName: SITE_NAME,
+-  keywords: [
+-    'анкерные болты Бишкек',
+-    'анкерные шайбы Бишкек',
+-    'ванночки для сварки Бишкек',
+-    'тайроты Бишкек',
+-    'металлопрокат Бишкек',
+-    'плазменная резка Бишкек',
+-  ],
+   alternates: { canonical: '/' },
+   openGraph: {
+     type: 'website',
+     locale: 'ru_KG',
+     url: SITE_URL,
+     siteName: SITE_NAME,
+-    title: 'Металлоизделия в Бишкеке — производство и цены | ИП Райымжанов',
++    title: TITLE,
+     description: DESCRIPTION,
+     images: [
+       {
+@@ -78,6 +70,13 @@ const jsonLd = {
+       image: `${SITE_URL}/og-image.jpg`,
+       logo: `${SITE_URL}/logo-512.png`,
+       telephone: PHONES[0].tel,
++      contactPoint: PHONES.map((phone) => ({
++        '@type': 'ContactPoint',
++        telephone: phone.tel,
++        contactType: 'sales',
++        areaServed: 'KG',
++        availableLanguage: ['ru'],
++      })),
+       priceRange: 'сом',
+       currenciesAccepted: 'KGS',
+       paymentAccepted: 'Наличные, бартер',
+diff --git a/app/page.tsx b/app/page.tsx
+index b7e9179..77a6944 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -119,7 +119,7 @@ export default function Home() {
+             </div>
+             <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
+               <h4 className="font-semibold text-lg sm:text-xl mb-2">Выгодные цены</h4>
+-              <p className="text-slate-600 text-[15px] sm:text-base">Прямые поставки без посредников — одни из лучших цен в Кыргызстане.</p>
++              <p className="text-slate-600 text-[15px] sm:text-base">Цена формируется на производстве — без наценки посредников и перекупщиков.</p>
+             </div>
+             <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
+               <h4 className="font-semibold text-lg sm:text-xl mb-2">Быстрые сроки</h4>
+@@ -129,13 +129,13 @@ export default function Home() {
+ 
+           <p className="text-[17px] sm:text-lg leading-relaxed mb-10">
+             Мы обеспечиваем строительные компании, подрядчиков и частных застройщиков
+-            качественным крепежом по всей территории Кыргызстана. Все изделия соответствуют
+-            требованиям ГОСТ и проходят строгий контроль качества.
++            крепежом по всей территории Кыргызстана. Стандартные изделия изготавливаем
++            по ГОСТ, нестандартные — по чертежам и размерам заказчика.
+           </p>
+ 
+           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Условия работы</h3>
+           <ul className="space-y-3 text-[17px] sm:text-lg mb-12">
+-            <li><strong aria-hidden="true">✅</strong> Полное соответствие ГОСТ и ТУ</li>
++            <li><strong aria-hidden="true">✅</strong> Изготовление по ГОСТ и ТУ, нестандарт — по чертежу</li>
+             <li><strong aria-hidden="true">✅</strong> Изготовление по вашим чертежам и размерам</li>
+             <li><strong aria-hidden="true">✅</strong> Оптовые поставки крупным объектам</li>
+             <li><strong aria-hidden="true">✅</strong> Самовывоз со склада в Бишкеке (Профсоюзная 2/1)</li>
+diff --git a/components/Advantages.tsx b/components/Advantages.tsx
+index 518a08a..d7a82cc 100644
+--- a/components/Advantages.tsx
++++ b/components/Advantages.tsx
+@@ -5,14 +5,31 @@ export default function Advantages() {
+         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+           {[
+-            { icon: "🏭", title: "Собственное производство" },
+-            { icon: "⚡", title: "Быстрое изготовление" },
+-            { icon: "🇰🇬", title: "Доставка по Кыргызстану" },
+-            { icon: "📏", title: "Индивидуальные размеры" },
+-          ].map((item, i) => (
+-            <div key={i} className="min-w-0 bg-white p-5 sm:p-8 rounded-3xl text-center card-hover">
++            {
++              icon: "🏭",
++              title: "Собственное производство",
++              text: "Цех и склад в Бишкеке: от металлопроката до готовой детали без посредников.",
++            },
++            {
++              icon: "⚡",
++              title: "Быстрое изготовление",
++              text: "Стандартные позиции со склада, изделия на заказ — от 1 до 5 дней.",
++            },
++            {
++              icon: "🇰🇬",
++              title: "Доставка по Кыргызстану",
++              text: "Самовывоз с Профсоюзной 2/1 или доставка по городу и регионам.",
++            },
++            {
++              icon: "📏",
++              title: "Индивидуальные размеры",
++              text: "Изготовим по чертежу: диаметр, длина, отверстия, марка стали.",
++            },
++          ].map((item) => (
++            <div key={item.title} className="min-w-0 bg-white p-5 sm:p-8 rounded-3xl text-center card-hover">
+               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6" aria-hidden="true">{item.icon}</div>
+               <h3 className="font-semibold text-base sm:text-xl break-words">{item.title}</h3>
++              <p className="text-slate-600 text-sm mt-2 leading-relaxed">{item.text}</p>
+             </div>
+           ))}
+         </div>
+diff --git a/components/Header.tsx b/components/Header.tsx
+index 4eb77ca..3604aec 100644
+--- a/components/Header.tsx
++++ b/components/Header.tsx
+@@ -23,7 +23,7 @@ export default function Header() {
+     <header className="bg-white shadow-sm sticky top-0 z-50">
+       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+         {/* Логотип */}
+-        <Link href="/" className="flex items-center gap-3 min-w-0">
++        <Link href="/" aria-label="ИП Райымжанов — на главную" className="flex items-center gap-3 min-w-0">
+           <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl md:text-3xl font-bold flex-shrink-0">
+             Р
+           </div>
+diff --git a/data/catalog.ts b/data/catalog.ts
+index 53a99c0..4ca2932 100644
+--- a/data/catalog.ts
++++ b/data/catalog.ts
+@@ -26,6 +26,8 @@ export type Category = {
+   intro: string[];
+   /** Вопросы-ответы для блока FAQ и разметки FAQPage */
+   faq: Faq[];
++  /** Диапазон размеров одной строкой — под H1 и в карточке на главной */
++  range: string;
+   /** Фото категории: карточка на главной, превью в соцсетях */
+   image: string;
+   /** Alt для этого фото */
+@@ -37,6 +39,7 @@ export type Category = {
+ export const categories: Category[] = [
+   {
+     id: 'washer',
++    range: 'Ø16–Ø32 мм · 50×50 — 90×90 мм',
+     image: '/images/products/anker-shayba.jpg',
+     imageAlt: 'Анкерные шайбы АШ на складе в Бишкеке',
+     name: 'Анкерные шайбы',
+@@ -72,6 +75,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'bath',
++    range: 'd-18 — d-32 мм · новый ГОСТ',
+     image: '/images/products/vannochki.jpg',
+     imageAlt: 'Ванночки для сварки арматуры',
+     name: 'Ванночки для сварки',
+@@ -107,6 +111,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'anchor',
++    range: 'М12–М48 · длина до 1500 мм, по чертежу',
+     image: '/images/products/ankernye-shpilki.jpg',
+     imageAlt: 'Анкерные болты и шпильки',
+     name: 'Анкерные болты',
+@@ -142,6 +147,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'tie',
++    range: 'любой диаметр и длина под вашу опалубку',
+     image: '/images/products/tajroty.jpg',
+     imageAlt: 'Тайроты для опалубки',
+     name: 'Тайроты',
+@@ -173,6 +179,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'mufta',
++    range: 'Ø20, 22, 25, 28, 32 мм',
+     image: '/images/products/mufta-armatury.jpg',
+     imageAlt: 'Муфты для соединения арматуры',
+     name: 'Муфты для арматуры',
+@@ -208,6 +215,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'foundation',
++    range: 'по чертежу заказчика · от 1 детали',
+     image: '/images/products/zakladnye-detali.jpg',
+     imageAlt: 'Закладные детали по чертежам',
+     name: 'Закладные детали',
+@@ -243,6 +251,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'stand',
++    range: 'высота и нагрузка — под проект',
+     image: '/images/products/teleskopicheskie-stoyki.jpg',
+     imageAlt: 'Телескопические стойки для опалубки',
+     name: 'Стойки телескопические',
+@@ -274,6 +283,7 @@ export const categories: Category[] = [
+   },
+   {
+     id: 'other',
++    range: 'по чертежу',
+     image: '/images/products/zakladnye-detali.jpg',
+     imageAlt: 'Прочие металлоизделия',
+     name: 'Прочее',

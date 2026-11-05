@@ -26,6 +26,8 @@ export type Category = {
   intro: string[];
   /** Вопросы-ответы для блока FAQ и разметки FAQPage */
   faq: Faq[];
+  /** Диапазон размеров одной строкой — под H1 и в карточке на главной */
+  range: string;
   /** Фото категории: карточка на главной, превью в соцсетях */
   image: string;
   /** Alt для этого фото */
@@ -37,6 +39,7 @@ export type Category = {
 export const categories: Category[] = [
   {
     id: 'washer',
+    range: 'Ø16–Ø32 мм · 50×50 — 90×90 мм',
     image: '/images/products/anker-shayba.jpg',
     imageAlt: 'Анкерные шайбы АШ на складе в Бишкеке',
     name: 'Анкерные шайбы',
@@ -72,6 +75,7 @@ export const categories: Category[] = [
   },
   {
     id: 'bath',
+    range: 'd-18 — d-32 мм · новый ГОСТ',
     image: '/images/products/vannochki.jpg',
     imageAlt: 'Ванночки для сварки арматуры',
     name: 'Ванночки для сварки',
@@ -107,6 +111,7 @@ export const categories: Category[] = [
   },
   {
     id: 'anchor',
+    range: 'М12–М48 · длина до 1500 мм, по чертежу',
     image: '/images/products/ankernye-shpilki.jpg',
     imageAlt: 'Анкерные болты и шпильки',
     name: 'Анкерные болты',
@@ -142,6 +147,7 @@ export const categories: Category[] = [
   },
   {
     id: 'tie',
+    range: 'любой диаметр и длина под вашу опалубку',
     image: '/images/products/tajroty.jpg',
     imageAlt: 'Тайроты для опалубки',
     name: 'Тайроты',
@@ -173,6 +179,7 @@ export const categories: Category[] = [
   },
   {
     id: 'mufta',
+    range: 'Ø20, 22, 25, 28, 32 мм',
     image: '/images/products/mufta-armatury.jpg',
     imageAlt: 'Муфты для соединения арматуры',
     name: 'Муфты для арматуры',
@@ -208,6 +215,7 @@ export const categories: Category[] = [
   },
   {
     id: 'foundation',
+    range: 'по чертежу заказчика · от 1 детали',
     image: '/images/products/zakladnye-detali.jpg',
     imageAlt: 'Закладные детали по чертежам',
     name: 'Закладные детали',
@@ -243,6 +251,7 @@ export const categories: Category[] = [
   },
   {
     id: 'stand',
+    range: 'высота и нагрузка — под проект',
     image: '/images/products/teleskopicheskie-stoyki.jpg',
     imageAlt: 'Телескопические стойки для опалубки',
     name: 'Стойки телескопические',
@@ -274,6 +283,7 @@ export const categories: Category[] = [
   },
   {
     id: 'other',
+    range: 'по чертежу',
     image: '/images/products/zakladnye-detali.jpg',
     imageAlt: 'Прочие металлоизделия',
     name: 'Прочее',

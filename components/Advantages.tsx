@@ -5,14 +5,31 @@ export default function Advantages() {
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {[
-            { icon: "🏭", title: "Собственное производство" },
-            { icon: "⚡", title: "Быстрое изготовление" },
-            { icon: "🇰🇬", title: "Доставка по Кыргызстану" },
-            { icon: "📏", title: "Индивидуальные размеры" },
-          ].map((item, i) => (
-            <div key={i} className="min-w-0 bg-white p-5 sm:p-8 rounded-3xl text-center card-hover">
+            {
+              icon: "🏭",
+              title: "Собственное производство",
+              text: "Цех и склад в Бишкеке: от металлопроката до готовой детали без посредников.",
+            },
+            {
+              icon: "⚡",
+              title: "Быстрое изготовление",
+              text: "Стандартные позиции со склада, изделия на заказ — от 1 до 5 дней.",
+            },
+            {
+              icon: "🇰🇬",
+              title: "Доставка по Кыргызстану",
+              text: "Самовывоз с Профсоюзной 2/1 или доставка по городу и регионам.",
+            },
+            {
+              icon: "📏",
+              title: "Индивидуальные размеры",
+              text: "Изготовим по чертежу: диаметр, длина, отверстия, марка стали.",
+            },
+          ].map((item) => (
+            <div key={item.title} className="min-w-0 bg-white p-5 sm:p-8 rounded-3xl text-center card-hover">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6" aria-hidden="true">{item.icon}</div>
               <h3 className="font-semibold text-base sm:text-xl break-words">{item.title}</h3>
+              <p className="text-slate-600 text-sm mt-2 leading-relaxed">{item.text}</p>
             </div>
           ))}
         </div>
