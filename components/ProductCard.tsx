@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Product } from '@/data/products';
-import { formatPrice } from '@/data/products';
+import { formatPrice, productAlt, productHref } from '@/data/products';
 import WhatsAppLink from './WhatsAppLink';
 
 export default function ProductCard({ product }: { product: Product }) {
   const price = formatPrice(product);
-  const href = `/catalog/${product.category}`;
+  const href = productHref(product);
   const showUnit = Boolean(product.unit) && price !== 'По запросу';
 
   return (
@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="relative h-56 overflow-hidden bg-slate-100">
         <Image
           src={product.image}
-          alt={product.name}
+          alt={productAlt(product)}
           fill
           sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 100vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500"

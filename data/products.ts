@@ -2,6 +2,8 @@ import type { CategoryId } from './catalog';
 
 export type Product = {
   id: number;
+  /** Человекочитаемый URL: /catalog/<category>/<slug> */
+  slug: string;
   name: string;
   category: CategoryId;
   diameter?: string;
@@ -20,6 +22,7 @@ export const products: Product[] = [
   // ==================== АНКЕРНЫЕ ШАЙБЫ ====================
   {
     id: 1,
+    slug: "ankernaya-shayba-ash-8",
     name: "Анкерная шайба АШ-8",
     category: "washer",
     diameter: "d-32",
@@ -33,6 +36,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
+    slug: "ankernaya-shayba-ash-7",
     name: "Анкерная шайба АШ-7",
     category: "washer",
     diameter: "d-28",
@@ -46,6 +50,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
+    slug: "ankernaya-shayba-ash-6",
     name: "Анкерная шайба АШ-6",
     category: "washer",
     diameter: "d-25",
@@ -59,6 +64,7 @@ export const products: Product[] = [
   },
   {
     id: 4,
+    slug: "ankernaya-shayba-ash-5",
     name: "Анкерная шайба АШ-5",
     category: "washer",
     diameter: "d-22",
@@ -72,6 +78,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
+    slug: "ankernaya-shayba-ash-4",
     name: "Анкерная шайба АШ-4",
     category: "washer",
     diameter: "d-20",
@@ -85,6 +92,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
+    slug: "ankernaya-shayba-ash-3",
     name: "Анкерная шайба АШ-3",
     category: "washer",
     diameter: "d-18",
@@ -98,6 +106,7 @@ export const products: Product[] = [
   },
   {
     id: 7,
+    slug: "ankernaya-shayba-ash-2",
     name: "Анкерная шайба АШ-2",
     category: "washer",
     diameter: "d-16",
@@ -113,6 +122,7 @@ export const products: Product[] = [
   // ==================== ВАННОЧКИ ====================
   {
     id: 8,
+    slug: "vannochka-dlya-svarki-d-32",
     name: "Ванночка для сварки d-32",
     category: "bath",
     diameter: "d-32",
@@ -125,6 +135,7 @@ export const products: Product[] = [
   },
   {
     id: 9,
+    slug: "vannochka-dlya-svarki-d-28",
     name: "Ванночка для сварки d-28",
     category: "bath",
     diameter: "d-28",
@@ -137,6 +148,7 @@ export const products: Product[] = [
   },
   {
     id: 10,
+    slug: "vannochka-dlya-svarki-d-25",
     name: "Ванночка для сварки d-25",
     category: "bath",
     diameter: "d-25",
@@ -149,6 +161,7 @@ export const products: Product[] = [
   },
   {
     id: 11,
+    slug: "vannochka-dlya-svarki-d-22",
     name: "Ванночка для сварки d-22",
     category: "bath",
     diameter: "d-22",
@@ -161,6 +174,7 @@ export const products: Product[] = [
   },
   {
     id: 12,
+    slug: "vannochka-dlya-svarki-d-20",
     name: "Ванночка для сварки d-20",
     category: "bath",
     diameter: "d-20",
@@ -173,6 +187,7 @@ export const products: Product[] = [
   },
   {
     id: 13,
+    slug: "vannochka-dlya-svarki-d-18",
     name: "Ванночка для сварки d-18",
     category: "bath",
     diameter: "d-18",
@@ -187,6 +202,7 @@ export const products: Product[] = [
   // ==================== МУФТЫ ДЛЯ АРМАТУРЫ ====================
   {
     id: 18,
+    slug: "mufta-dlya-armatury-d-20",
     name: "Муфта для арматуры Ø20",
     category: "mufta",
     diameter: "d-20",
@@ -199,6 +215,7 @@ export const products: Product[] = [
   },
   {
     id: 19,
+    slug: "mufta-dlya-armatury-d-22",
     name: "Муфта для арматуры Ø22",
     category: "mufta",
     diameter: "d-22",
@@ -211,6 +228,7 @@ export const products: Product[] = [
   },
   {
     id: 20,
+    slug: "mufta-dlya-armatury-d-25",
     name: "Муфта для арматуры Ø25",
     category: "mufta",
     diameter: "d-25",
@@ -223,6 +241,7 @@ export const products: Product[] = [
   },
   {
     id: 21,
+    slug: "mufta-dlya-armatury-d-28",
     name: "Муфта для арматуры Ø28",
     category: "mufta",
     diameter: "d-28",
@@ -235,6 +254,7 @@ export const products: Product[] = [
   },
   {
     id: 22,
+    slug: "mufta-dlya-armatury-d-32",
     name: "Муфта для арматуры Ø32",
     category: "mufta",
     diameter: "d-32",
@@ -249,6 +269,7 @@ export const products: Product[] = [
   // ==================== НА ЗАКАЗ ====================
   {
     id: 14,
+    slug: "ankernyy-bolt-shpilka",
     name: "Анкерный болт / Шпилька",
     category: "anchor",
     unit: "шт",
@@ -259,6 +280,7 @@ export const products: Product[] = [
   },
   {
     id: 15,
+    slug: "tayrot",
     name: "Тайрота (Тайрод)",
     category: "tie",
     unit: "шт",
@@ -269,6 +291,7 @@ export const products: Product[] = [
   },
   {
     id: 16,
+    slug: "stoyka-teleskopicheskaya",
     name: "Стойка телескопическая",
     category: "stand",
     unit: "шт",
@@ -279,6 +302,7 @@ export const products: Product[] = [
   },
   {
     id: 17,
+    slug: "zakladnye-detali",
     name: "Закладные детали",
     category: "foundation",
     unit: "кг",
@@ -301,4 +325,16 @@ export function formatPrice(product: Product): string {
 
 export function productsByCategory(category: string): Product[] {
   return products.filter((p) => p.category === category);
+}
+
+export function getProduct(category: string, slug: string): Product | undefined {
+  return products.find((p) => p.category === category && p.slug === slug);
+}
+
+export function productHref(product: Product): string {
+  return `/catalog/${product.category}/${product.slug}`;
+}
+
+export function productAlt(product: Product): string {
+  return [product.name, product.diameter, product.size].filter(Boolean).join(", ");
 }

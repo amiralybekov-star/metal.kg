@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Страница не найдена — ИП Райымжанов, Бишкек',
+  description: 'Такой страницы нет. Каталог металлоизделий и контакты — на сайте metal.kg.',
+};
 
 export default function NotFound() {
   return (

@@ -14,9 +14,9 @@ const inter = Inter({
   display: 'swap',
 });
 
-const TITLE = 'ИП Райымжанов — Анкерные болты, металлопрокат и изделия из металла в Бишкеке';
+const TITLE = 'Металлоизделия в Бишкеке от производителя — анкерные болты и шайбы';
 const DESCRIPTION =
-  'Производство анкерных болтов, анкерных шайб, ванночек для сварки, тайротов. Плазменная резка металла в Бишкеке. Доставка по всему Кыргызстану.';
+  'Производим анкерные болты и шайбы АШ, ванночки для сварки, тайроты, муфты и закладные детали. Цены от производителя, склад в Бишкеке, доставка по Кыргызстану.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -32,13 +32,12 @@ export const metadata: Metadata = {
     'плазменная резка Бишкек',
   ],
   alternates: { canonical: '/' },
-  robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     locale: 'ru_KG',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: 'ИП Райымжанов — Производство металлоизделий в Кыргызстане',
+    title: 'Металлоизделия в Бишкеке — производство и цены | ИП Райымжанов',
     description: DESCRIPTION,
     images: [
       {
@@ -73,7 +72,7 @@ const jsonLd = {
       description: `${SITE_TAGLINE}. ${DESCRIPTION}`,
       url: SITE_URL,
       image: `${SITE_URL}/og-image.jpg`,
-      logo: `${SITE_URL}/og-image.jpg`,
+      logo: `${SITE_URL}/logo-512.png`,
       telephone: PHONES[0].tel,
       priceRange: 'сом',
       currenciesAccepted: 'KGS',

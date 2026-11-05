@@ -3,6 +3,7 @@ import Link from 'next/link';
 import CatalogClient from '@/components/CatalogClient';
 import WhatsAppLink from '@/components/WhatsAppLink';
 import { products } from '@/data/products';
+import { productHref } from '@/data/products';
 import { navCategories } from '@/data/catalog';
 import { SITE_URL } from '@/data/site';
 import { formatPrice } from '@/data/products';
@@ -23,8 +24,25 @@ export const metadata: Metadata = {
 export default function CatalogPage() {
   const foundation = products.find((p) => p.category === 'foundation');
 
+  const listLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Каталог продукции — ИП Райымжанов',
+    numberOfItems: products.length,
+    itemListElement: products.map((product, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: product.name,
+      url: `${SITE_URL}${productHref(product)}`,
+    })),
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listLd) }}
+      />
       <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Каталог продукции</h1>
         <p className="text-lg sm:text-xl text-slate-600">

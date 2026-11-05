@@ -85,8 +85,34 @@ lib/analytics.ts          отправка событий и конверсий 
 
 Пока метки пустые, события уходят в gtag, но конверсии в Ads не засчитываются.
 
+## SEO
+
+Страницы и разметка:
+
+- **Товар** — `/catalog/<category>/<slug>`, свой title/description, таблица характеристик, `Product` + `Offer` (цена, KGS, наличие), `BreadcrumbList`.
+- **Категория** — `/catalog/<category>`: текст «что это и где применяется», таблица размеров и цен,
+  блок FAQ (`FAQPage`), `ItemList`, хлебные крошки.
+- **Sitemap** собирается из `data/catalog.ts` и `data/products.ts` — новые товары и категории
+  попадают туда автоматически, руками ничего добавлять не нужно.
+- **Canonical** и `og:url` строятся от `NEXT_PUBLIC_SITE_URL`, поэтому на preview-домене
+  они указывают на прод — дублей в индексе не будет.
+- Preview-деплои Vercel отдают `X-Robots-Tag: noindex`, `www.metal.kg` редиректится на `metal.kg`
+  (см. `next.config.ts`).
+
+Чтобы добавить товар: скопируйте объект в `data/products.ts`, задайте уникальный `slug`
+(латиницей, без пробелов), правильный `category` и цену. Title/description и микроразметка
+соберутся сами.
+
 ## Деплой
 
 Пуш в `main` → Vercel собирает и выкатывает автоматически. После изменения домена
 перегенерируйте sitemap (он собирается на билде) и отправьте его в Google Search Console:
 `https://metal.kg/sitemap.xml`.
+
+## Превью и иконки
+
+- `public/og/products/<slug>.jpg` — OG-картинки 1200×630 для страниц товаров; имя файла
+  совпадает со `slug`. Добавили товар → положите туда картинку, иначе превью останется
+  без изображения.
+- `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` — иконки из монограммы «РИ».
+  `public/logo-512.png` используется в разметке `LocalBusiness`.
