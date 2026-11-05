@@ -26,6 +26,10 @@ export type Category = {
   intro: string[];
   /** Вопросы-ответы для блока FAQ и разметки FAQPage */
   faq: Faq[];
+  /** Фото категории: карточка на главной, превью в соцсетях */
+  image: string;
+  /** Alt для этого фото */
+  imageAlt: string;
   /** Показывать ли ссылку в навигации каталога */
   inNav: boolean;
 };
@@ -33,6 +37,8 @@ export type Category = {
 export const categories: Category[] = [
   {
     id: 'washer',
+    image: '/images/products/anker-shayba.jpg',
+    imageAlt: 'Анкерные шайбы АШ на складе в Бишкеке',
     name: 'Анкерные шайбы',
     accusative: 'анкерные шайбы',
     description:
@@ -66,6 +72,8 @@ export const categories: Category[] = [
   },
   {
     id: 'bath',
+    image: '/images/products/vannochki.jpg',
+    imageAlt: 'Ванночки для сварки арматуры',
     name: 'Ванночки для сварки',
     accusative: 'ванночки для сварки арматуры',
     description:
@@ -99,6 +107,8 @@ export const categories: Category[] = [
   },
   {
     id: 'anchor',
+    image: '/images/products/ankernye-shpilki.jpg',
+    imageAlt: 'Анкерные болты и шпильки',
     name: 'Анкерные болты',
     accusative: 'анкерные болты и шпильки',
     description:
@@ -132,6 +142,8 @@ export const categories: Category[] = [
   },
   {
     id: 'tie',
+    image: '/images/products/tajroty.jpg',
+    imageAlt: 'Тайроты для опалубки',
     name: 'Тайроты',
     accusative: 'тайроты (тяжи опалубки)',
     description:
@@ -161,6 +173,8 @@ export const categories: Category[] = [
   },
   {
     id: 'mufta',
+    image: '/images/products/mufta-armatury.jpg',
+    imageAlt: 'Муфты для соединения арматуры',
     name: 'Муфты для арматуры',
     accusative: 'муфты для арматуры',
     description:
@@ -194,6 +208,8 @@ export const categories: Category[] = [
   },
   {
     id: 'foundation',
+    image: '/images/products/zakladnye-detali.jpg',
+    imageAlt: 'Закладные детали по чертежам',
     name: 'Закладные детали',
     accusative: 'закладные детали',
     description:
@@ -227,6 +243,8 @@ export const categories: Category[] = [
   },
   {
     id: 'stand',
+    image: '/images/products/teleskopicheskie-stoyki.jpg',
+    imageAlt: 'Телескопические стойки для опалубки',
     name: 'Стойки телескопические',
     accusative: 'телескопические стойки',
     description:
@@ -256,6 +274,8 @@ export const categories: Category[] = [
   },
   {
     id: 'other',
+    image: '/images/products/zakladnye-detali.jpg',
+    imageAlt: 'Прочие металлоизделия',
     name: 'Прочее',
     accusative: 'металлоизделия',
     description: 'Прочие металлоизделия собственного производства.',

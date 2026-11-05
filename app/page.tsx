@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import Advantages from '@/components/Advantages';
 import WhatsAppLink from '@/components/WhatsAppLink';
@@ -12,29 +13,78 @@ export default function Home() {
       <Hero />
       <Advantages />
 
-      {/* Категории — внутренняя перелинковка на страницы каталога */}
+      {/* Категории — фото на фоне, чтобы было понятно без чтения */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-3 md:mb-4">
           Каталог продукции
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <p className="text-center text-slate-600 mb-8 md:mb-10 max-w-2xl mx-auto">
+          Семь категорий собственного производства — от анкерных шайб до закладных деталей по чертежам
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {navCategories.map((category) => {
-            const count = products.filter((p) => p.category === category.id).length;
+            const items = products.filter((p) => p.category === category.id);
+            const prices = items
+              .map((p) => p.priceCash ?? p.price ?? 0)
+              .filter((price) => price > 0);
+            const from = prices.length > 0 ? Math.min(...prices) : null;
+
             return (
               <Link
                 key={category.id}
                 href={`/catalog/${category.id}`}
-                className="group bg-white border border-slate-200 rounded-3xl p-6 hover:border-blue-300 hover:shadow-lg transition-all"
+                className="group relative block aspect-[4/3] rounded-3xl overflow-hidden bg-slate-200 hover:shadow-xl transition-shadow"
               >
-                <h3 className="font-semibold text-lg mb-1 group-hover:text-blue-700 transition-colors">
-                  {category.name}
-                </h3>
-                <p className="text-sm text-slate-500">
-                  {count > 0 ? `${count} ${plural(count)} в наличии и под заказ` : 'Под заказ'}
-                </p>
+                <Image
+                  src={category.image}
+                  alt={category.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/45 to-slate-900/5"
+                />
+
+                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+                  <h3 className="text-white font-semibold text-xl sm:text-2xl leading-tight">
+                    {category.name}
+                  </h3>
+                  <p className="text-slate-200 text-sm mt-1.5">
+                    {items.length > 0 ? `${items.length} ${plural(items.length)}` : 'Под заказ'}
+                    {from !== null && ` · от ${from} сом`}
+                  </p>
+                </div>
               </Link>
             );
           })}
+
+          {/* Восьмая карточка закрывает сетку и ловит запросы «по чертежу» */}
+          <Link
+            href="/contacts"
+            className="group relative block aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 hover:shadow-xl transition-shadow"
+          >
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(56,189,248,0.25),transparent_60%)]"
+            />
+            <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+              <h3 className="text-white font-semibold text-xl sm:text-2xl leading-tight">
+                Не нашли нужное?
+              </h3>
+              <p className="text-slate-300 text-sm mt-1.5">
+                Изготовим по вашему чертежу — пришлите эскиз в WhatsApp
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-emerald-300 text-sm font-medium">
+                Обсудить заказ
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
