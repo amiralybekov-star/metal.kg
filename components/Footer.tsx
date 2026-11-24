@@ -4,6 +4,7 @@ import WhatsAppLink from './WhatsAppLink';
 import PhoneLink from './PhoneLink';
 import { ADDRESS, PHONES, WORK_HOURS } from '@/data/contacts';
 import { navCategories } from '@/data/catalog';
+import { CONTENT_UPDATED, FOUNDING_YEAR } from '@/data/site';
 
 export default function Footer() {
   return (
@@ -17,7 +18,7 @@ export default function Footer() {
               </div>
               <div className="text-white font-bold text-xl">ИП Райымжанов</div>
             </div>
-            <p className="text-sm">Производство металлоизделий в Бишкеке с 2009 года.</p>
+            <p className="text-sm">Производство металлоизделий в Бишкеке с {FOUNDING_YEAR} года.</p>
           </div>
 
           <div>
@@ -35,7 +36,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-white font-semibold mb-4">Контакты</h4>
-            <div className="space-y-3 text-sm">
+            <address className="space-y-3 text-sm not-italic">
               {PHONES.map((phone) => (
                 <div key={phone.tel}>
                   <PhoneLink tel={phone.tel} source="footer" className="hover:text-white">
@@ -47,7 +48,7 @@ export default function Footer() {
                 {ADDRESS.street}, {ADDRESS.city}
               </div>
               <div>{WORK_HOURS}</div>
-            </div>
+            </address>
           </div>
 
           <div>
@@ -65,6 +66,17 @@ export default function Footer() {
 
         <div className="text-center text-xs pt-12 border-t border-slate-800 mt-12">
           © {new Date().getFullYear()} ИП Райымжанов. Все права защищены.
+          <span className="block mt-2">
+            Информация обновлена:{' '}
+            <time dateTime={CONTENT_UPDATED}>
+              {new Date(CONTENT_UPDATED).toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                timeZone: 'UTC',
+              })}
+            </time>
+          </span>
         </div>
       </div>
     </footer>

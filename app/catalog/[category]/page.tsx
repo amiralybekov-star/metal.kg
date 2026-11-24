@@ -8,7 +8,7 @@ import FaqList from '@/components/FaqList';
 import { formatPrice, productsByCategory } from '@/data/products';
 import { getCategory, navCategories } from '@/data/catalog';
 import { SITE_URL } from '@/data/site';
-import { breadcrumbLd, faqLd, itemListLd } from '@/lib/seo';
+import { breadcrumbLd, faqLd, itemListLd, pageOpenGraph } from '@/lib/seo';
 
 type CategoryParams = { params: Promise<{ category: string }> };
 
@@ -23,18 +23,19 @@ export async function generateMetadata({ params }: CategoryParams): Promise<Meta
 
   const url = `${SITE_URL}/catalog/${cat.id}`;
 
-  const title = `${cat.seoTitle} | ИП Райымжанов`;
+  // Бренд не дописываем: seoTitle уже 45–60 символов, с ним title обрезался в выдаче.
+  const title = cat.seoTitle;
 
   return {
     title,
     description: cat.seoDescription,
     alternates: { canonical: url },
-    openGraph: {
+    openGraph: pageOpenGraph({
       title,
       description: cat.seoDescription,
       url,
-      type: 'website',
-    },
+      image: { url: cat.image, alt: cat.imageAlt },
+    }),
   };
 }
 

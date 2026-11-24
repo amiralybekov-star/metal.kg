@@ -5,7 +5,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
+import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
 import { ADDRESS, PHONES, WHATSAPP_NUMBER } from '@/data/contacts';
 
 // Inter, ужатый до кириллицы + латиницы (120 КБ, оси 100–900).
@@ -18,7 +18,7 @@ const inter = localFont({
   fallback: ['system-ui', 'Segoe UI', 'Arial', 'sans-serif'],
 });
 
-const TITLE = 'Металлоизделия в Бишкеке от производителя — анкерные болты и шайбы';
+const TITLE = 'Металлоизделия в Бишкеке — анкерные болты и шайбы';
 const DESCRIPTION =
   'Производим анкерные болты и шайбы АШ, ванночки для сварки, тайроты, муфты и закладные детали. Цены от производителя, склад в Бишкеке, доставка по Кыргызстану.';
 
@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: `${SITE_URL}/about` }],
+  creator: SITE_NAME,
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
@@ -69,6 +71,7 @@ const jsonLd = {
       url: SITE_URL,
       image: `${SITE_URL}/og-image.jpg`,
       logo: `${SITE_URL}/logo-512.png`,
+      foundingDate: FOUNDING_YEAR,
       telephone: PHONES[0].tel,
       contactPoint: PHONES.map((phone) => ({
         '@type': 'ContactPoint',
@@ -104,6 +107,7 @@ const jsonLd = {
       url: SITE_URL,
       name: SITE_NAME,
       inLanguage: 'ru-KG',
+      dateModified: CONTENT_UPDATED,
       publisher: { '@id': `${SITE_URL}/#business` },
     },
   ],

@@ -3,6 +3,9 @@ export const SITE_URL =
 
 export const SITE_NAME = 'ИП Райымжанов';
 
+/** Год основания — для текстов и разметки LocalBusiness.foundingDate */
+export const FOUNDING_YEAR = '2009';
+
 export const SITE_TAGLINE = 'Производство металлоизделий в Бишкеке';
 
 /**

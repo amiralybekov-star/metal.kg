@@ -5,9 +5,10 @@ import WhatsAppIcon from '@/components/WhatsAppIcon';
 import PhoneLink from '@/components/PhoneLink';
 import { ADDRESS, MAP_EMBED_URL, PHONES, TWO_GIS_URL, WHATSAPP_NUMBER, WORK_HOURS } from '@/data/contacts';
 import { SITE_URL } from '@/data/site';
+import { pageOpenGraph } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Контакты — +996 779 592 026 | ИП Райымжанов, Профсоюзная 2/1, Бишкек',
+  title: 'Контакты ИП Райымжанов — Профсоюзная 2/1, Бишкек',
   description:
     'Контакты ИП Райымжанов: +996 779 592 026, +996 706 646 264. Адрес: Профсоюзная 2/1, Бишкек. Производство анкерных болтов, шайб и металлоизделий.',
   keywords: [
@@ -19,12 +20,12 @@ export const metadata: Metadata = {
     'производство Бишкек',
   ],
   alternates: { canonical: `${SITE_URL}/contacts` },
-  openGraph: {
+  openGraph: pageOpenGraph({
     title: 'Контакты ИП Райымжанов — Металлоизделия Бишкек',
     description:
       'Звоните или пишите нам: +996 779 592 026, +996 706 646 264. Самовывоз со склада в Бишкеке.',
     url: `${SITE_URL}/contacts`,
-  },
+  }),
 };
 
 export default function ContactsPage() {

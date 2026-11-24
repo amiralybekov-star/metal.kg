@@ -6,19 +6,20 @@ import { products } from '@/data/products';
 import { productHref } from '@/data/products';
 import { navCategories } from '@/data/catalog';
 import { SITE_URL } from '@/data/site';
+import { pageOpenGraph } from '@/lib/seo';
 import { formatPrice } from '@/data/products';
 
 export const metadata: Metadata = {
-  title: 'Каталог продукции — анкерные болты, шайбы, ванночки, тайроты | ИП Райымжанов, Бишкек',
+  title: 'Каталог: анкерные болты, шайбы, ванночки — Бишкек',
   description:
     'Каталог металлоизделий собственного производства в Бишкеке: анкерные болты и шайбы, ванночки для сварки, тайроты, муфты для арматуры, закладные детали, телескопические стойки. Цены и наличие.',
   alternates: { canonical: `${SITE_URL}/catalog` },
-  openGraph: {
+  openGraph: pageOpenGraph({
     title: 'Каталог металлоизделий — ИП Райымжанов, Бишкек',
     description:
       'Анкерные болты, шайбы АШ, ванночки для сварки, тайроты, муфты, закладные детали и стойки — напрямую от производителя.',
     url: `${SITE_URL}/catalog`,
-  },
+  }),
 };
 
 export default function CatalogPage() {

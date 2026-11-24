@@ -1,9 +1,39 @@
+import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/data/site';
 import type { Product } from '@/data/products';
 import { productAlt } from '@/data/products';
 import type { Category, Faq } from '@/data/catalog';
 
 type Crumb = { name: string; url: string };
+
+const DEFAULT_OG_IMAGE = {
+  url: '/og-image.jpg',
+  width: 1200,
+  height: 630,
+  alt: 'ИП Райымжанов — производство металлоизделий в Бишкеке',
+};
+
+/**
+ * Open Graph для страницы. В Next openGraph страницы целиком заменяет
+ * openGraph из layout, поэтому без этого хелпера на внутренних страницах
+ * пропадали og:image, og:type и og:site_name.
+ */
+export function pageOpenGraph(og: {
+  title: string;
+  description: string;
+  url: string;
+  image?: { url: string; alt: string; width?: number; height?: number };
+}): NonNullable<Metadata['openGraph']> {
+  return {
+    type: 'website',
+    locale: 'ru_KG',
+    siteName: SITE_NAME,
+    title: og.title,
+    description: og.description,
+    url: og.url,
+    images: [og.image ?? DEFAULT_OG_IMAGE],
+  };
+}
 
 export function breadcrumbLd(items: Crumb[]) {
   return {

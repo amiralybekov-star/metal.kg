@@ -5,18 +5,19 @@ import WhatsAppIcon from '@/components/WhatsAppIcon';
 import PhoneLink from '@/components/PhoneLink';
 import { PHONES } from '@/data/contacts';
 import { SITE_URL } from '@/data/site';
+import { pageOpenGraph } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Услуги — изготовление металлоизделий и плазменная резка в Бишкеке | ИП Райымжанов',
+  title: 'Изготовление металлоизделий и плазменная резка, Бишкек',
   description:
     'Услуги завода металлоизделий в Бишкеке: изготовление анкерных болтов и шпилек, шайб АШ, ванночек для сварки, тайротов, плазменная резка и гибка металла по чертежам заказчика.',
   alternates: { canonical: `${SITE_URL}/services` },
-  openGraph: {
+  openGraph: pageOpenGraph({
     title: 'Услуги — ИП Райымжанов, Бишкек',
     description:
       'Изготовление крепежа и металлоизделий по ГОСТ и по чертежам: анкерные болты, шайбы, ванночки, тайроты, плазменная резка.',
     url: `${SITE_URL}/services`,
-  },
+  }),
 };
 
 const services = [
