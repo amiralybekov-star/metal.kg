@@ -10,6 +10,7 @@ import { getCategory, navCategories } from '@/data/catalog';
 import { ADDRESS, PHONES, WORK_HOURS } from '@/data/contacts';
 import { SITE_URL } from '@/data/site';
 import { breadcrumbLd, productLd } from '@/lib/seo';
+import { productSummary } from '@/lib/productText';
 
 type Params = { params: Promise<{ category: string; slug: string }> };
 
@@ -24,13 +25,18 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!product || !cat) return {};
 
   const price = formatPrice(product);
-  const priceText = price === 'По запросу' ? 'цена по запросу' : `${price} сом`;
-  const title = `${product.name} — ${priceText} в Бишкеке, производство`;
+  // У закладных formatPrice уже содержит «сом/кг»
+  const priceText =
+    price === 'По запросу' ? 'цена по запросу' : product.pricePerKg ? price : `${price} сом`;
+  const title =
+    price === 'По запросу'
+      ? `${product.name} на заказ в Бишкеке, изготовление`
+      : `${product.name} — ${priceText} в Бишкеке, производство`;
   const withPeriod = (value: string) => (/[.!?]$/.test(value) ? value : `${value}.`);
   const description = [
     withPeriod(product.name),
     product.description ? withPeriod(product.description) : '',
-    `Цена: ${priceText}${product.unit && price !== 'По запросу' ? ` за ${product.unit}` : ''}.`,
+    `Цена: ${priceText}${product.unit && price !== 'По запросу' && !product.pricePerKg ? ` за ${product.unit}` : ''}.`,
     product.priceBarter ? `Бартер — ${product.priceBarter} сом.` : '',
     'Производство в Бишкеке, самовывоз и доставка по Кыргызстану.',
   ]
@@ -224,6 +230,16 @@ export default async function ProductPage({ params }: Params) {
           <p className="text-slate-600 text-sm">
             По ГОСТ и по чертежам заказчика. Нестандартные размеры — от 1 до 5 дней.
           </p>
+        </div>
+      </section>
+
+      {/* Ответ одним абзацем: цена, размер, где купить. Его цитируют поиск и ИИ-ассистенты. */}
+      <section className="mt-14 max-w-4xl">
+        <h2 className="text-2xl font-semibold mb-4">Коротко о позиции</h2>
+        <div className="space-y-3 text-slate-700 text-[17px] leading-relaxed">
+          {productSummary(product, cat).map((paragraph) => (
+            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+          ))}
         </div>
       </section>
 

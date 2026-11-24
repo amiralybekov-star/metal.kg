@@ -7,7 +7,8 @@ import WhatsAppIcon from '@/components/WhatsAppIcon';
 import FaqList from '@/components/FaqList';
 import { formatPrice, productsByCategory } from '@/data/products';
 import { getCategory, navCategories } from '@/data/catalog';
-import { SITE_URL } from '@/data/site';
+import { CONTENT_UPDATED, SITE_URL } from '@/data/site';
+import { formatDate } from '@/lib/format';
 import { breadcrumbLd, faqLd, itemListLd, pageOpenGraph } from '@/lib/seo';
 
 type CategoryParams = { params: Promise<{ category: string }> };
@@ -90,7 +91,7 @@ export default async function CategoryPage({ params }: CategoryParams) {
         <span className="text-slate-700">{cat.name}</span>
       </nav>
 
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{cat.name}</h1>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{cat.name} в Бишкеке</h1>
       <p className="text-lg text-slate-600 max-w-3xl mb-4">{cat.description}</p>
       <p className="inline-flex flex-wrap items-center gap-2 text-sm text-slate-600 bg-slate-100 rounded-2xl px-4 py-2 mb-10">
         <span className="font-medium text-slate-900">Типоразмеры:</span>
@@ -138,7 +139,10 @@ export default async function CategoryPage({ params }: CategoryParams) {
       {/* Таблица характеристик — то, что ищут запросами «АШ-8 размеры», «ванночка д32» */}
       {items.length > 1 && hasSizes && (
         <section className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">Размеры и цены</h2>
+          <h2 className="text-2xl font-semibold mb-1">Размеры и цены</h2>
+          <p className="text-sm text-slate-500 mb-4">
+            Цены обновлены <time dateTime={CONTENT_UPDATED}>{formatDate(CONTENT_UPDATED)}</time>
+          </p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse min-w-[560px]">
               <caption className="sr-only">

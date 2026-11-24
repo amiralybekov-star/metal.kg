@@ -6,8 +6,19 @@ import WhatsAppLink from '@/components/WhatsAppLink';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 import { navCategories } from '@/data/catalog';
 import { products } from '@/data/products';
+import FaqList from '@/components/FaqList';
+import { homeFaq } from '@/data/faq';
+import { categoryFromPrice } from '@/lib/prices';
+import { faqLd } from '@/lib/seo';
+import { ArrowRight, Check, CheckCircle } from '@phosphor-icons/react/dist/ssr';
 
 export default function Home() {
+  const faq = homeFaq({
+    washer: categoryFromPrice('washer')?.price,
+    bath: categoryFromPrice('bath')?.price,
+    foundation: categoryFromPrice('foundation')?.price,
+  });
+
   return (
     <>
       <Hero />
@@ -79,9 +90,7 @@ export default function Home() {
               </p>
               <span className="mt-3 inline-flex items-center gap-1.5 text-emerald-300 text-sm font-medium">
                 Обсудить заказ
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" weight="bold" aria-hidden="true" />
               </span>
             </div>
           </Link>
@@ -102,13 +111,13 @@ export default function Home() {
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Что мы производим</h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[17px] sm:text-lg mb-12">
-            <li>✓ Анкерные болты и шпильки</li>
-            <li>✓ Анкерные шайбы АШ всех размеров</li>
-            <li>✓ Ванночки для сварки (новый ГОСТ)</li>
-            <li>✓ Тайроты (тяжелые и облегченные)</li>
-            <li>✓ Закладные детали</li>
-            <li>✓ Муфты для арматуры</li>
-            <li>✓ Стойки телескопические для опалубки</li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Анкерные болты и шпильки</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Анкерные шайбы АШ всех размеров</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Ванночки для сварки (новый ГОСТ)</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Тайроты (тяжелые и облегченные)</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Закладные детали</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Муфты для арматуры</span></li>
+            <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Стойки телескопические для опалубки</span></li>
           </ul>
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Почему выбирают нас</h3>
@@ -135,12 +144,22 @@ export default function Home() {
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Условия работы</h3>
           <ul className="space-y-3 text-[17px] sm:text-lg mb-12">
-            <li><strong aria-hidden="true">✅</strong> Изготовление по ГОСТ и ТУ, нестандарт — по чертежу</li>
-            <li><strong aria-hidden="true">✅</strong> Изготовление по вашим чертежам и размерам</li>
-            <li><strong aria-hidden="true">✅</strong> Оптовые поставки крупным объектам</li>
-            <li><strong aria-hidden="true">✅</strong> Самовывоз со склада в Бишкеке (Профсоюзная 2/1)</li>
-            <li><strong aria-hidden="true">✅</strong> Возможность бартера</li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Изготовление по ГОСТ и ТУ, нестандарт — по чертежу</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Изготовление по вашим чертежам и размерам</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Оптовые поставки крупным объектам</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Самовывоз со склада в Бишкеке (Профсоюзная 2/1)</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Возможность бартера</span></li>
           </ul>
+
+          {/* Частые вопросы: видимый текст + разметка FAQPage для поиска и ИИ-ответов */}
+          <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Частые вопросы</h3>
+          <div className="not-prose mb-12">
+            <FaqList items={faq} />
+          </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd(faq)) }}
+          />
 
           {/* CTA блок */}
           <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-10 text-center mt-8 not-prose">

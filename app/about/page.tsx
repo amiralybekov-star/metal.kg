@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { SITE_URL } from '@/data/site';
 import { pageOpenGraph } from '@/lib/seo';
+import { Factory, Package, SealCheck, Truck } from '@phosphor-icons/react/dist/ssr';
 
 export const metadata: Metadata = {
   title: "О компании ИП Райымжанов — металлоизделия с 2009 года",
@@ -61,7 +62,7 @@ export default function AboutPage() {
         {/* Преимущества */}
         <div className="grid md:grid-cols-2 gap-6 pt-6">
           <div className="bg-slate-50 p-6 rounded-3xl">
-            <div className="text-emerald-600 text-4xl mb-3">🏭</div>
+            <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700"><Factory className="w-7 h-7" aria-hidden="true" /></div>
             <h3 className="font-semibold text-xl mb-2">Собственное производство</h3>
             <p className="text-slate-600">
               Полный цикл от сырья до готовой продукции в Бишкеке — без посредников и переплат.
@@ -69,7 +70,7 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-slate-50 p-6 rounded-3xl">
-            <div className="text-emerald-600 text-4xl mb-3">✅</div>
+            <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700"><SealCheck className="w-7 h-7" aria-hidden="true" /></div>
             <h3 className="font-semibold text-xl mb-2">Соответствие ГОСТ</h3>
             <p className="text-slate-600">
               Строгий контроль качества на каждом этапе производства.
@@ -77,7 +78,7 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-slate-50 p-6 rounded-3xl">
-            <div className="text-emerald-600 text-4xl mb-3">📦</div>
+            <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700"><Package className="w-7 h-7" aria-hidden="true" /></div>
             <h3 className="font-semibold text-xl mb-2">Оптовые поставки</h3>
             <p className="text-slate-600">
               Выгодные условия для строительных компаний и подрядчиков.
@@ -85,7 +86,7 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-slate-50 p-6 rounded-3xl">
-            <div className="text-emerald-600 text-4xl mb-3">🚚</div>
+            <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700"><Truck className="w-7 h-7" aria-hidden="true" /></div>
             <h3 className="font-semibold text-xl mb-2">Самовывоз и доставка</h3>
             <p className="text-slate-600">
               Работаем Пн–Сб с 8:00 до 18:00, склад в Бишкеке.

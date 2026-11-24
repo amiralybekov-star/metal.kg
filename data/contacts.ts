@@ -14,6 +14,8 @@ export const ADDRESS = {
 };
 
 export const WORK_HOURS = 'Пн — Сб: 08:00 — 18:00';
+/** То же, для связного текста */
+export const WORK_HOURS_TEXT = 'с понедельника по субботу, с 8:00 до 18:00';
 
 export const TWO_GIS_URL = 'https://2gis.kg/bishkek/geo/15763234351075282';
 

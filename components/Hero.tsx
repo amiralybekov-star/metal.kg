@@ -28,14 +28,13 @@ export default function Hero() {
           Собственное производство в Бишкеке с 2009 года
         </p>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 md:mb-6">
-          Производство металлоизделий
-          <br className="hidden sm:block" /> в Бишкеке
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 md:mb-6 [text-wrap:balance]">
+          Анкерные шайбы, болты и ванночки от&nbsp;производителя в&nbsp;Бишкеке
         </h1>
 
         <p className="text-lg sm:text-xl md:text-2xl text-slate-200 max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed px-2">
-          Анкерные болты, шайбы, ванночки для сварки, тайроты и металлопрокат
-          <br className="hidden md:block" /> напрямую от производителя
+          Анкерные болты, шайбы, ванночки для сварки, тайроты, муфты и закладные детали.
+          <br className="hidden md:block" /> Склад на Профсоюзной 2/1, нестандарт по чертежу за 1–5 дней
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

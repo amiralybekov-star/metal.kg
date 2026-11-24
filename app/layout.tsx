@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
-import { ADDRESS, PHONES, WHATSAPP_NUMBER } from '@/data/contacts';
+import { ADDRESS, PHONES, TWO_GIS_URL, WHATSAPP_NUMBER } from '@/data/contacts';
 
 // Inter, ужатый до кириллицы + латиницы (120 КБ, оси 100–900).
 // Свой файл вместо next/font/google: сборка на Vercel падала на резолве
@@ -98,8 +98,9 @@ const jsonLd = {
           closes: '18:00',
         },
       ],
-      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
-      hasMap: 'https://2gis.kg/bishkek/geo/15763234351075282',
+      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`, TWO_GIS_URL],
+      hasMap: TWO_GIS_URL,
+      areaServed: { '@type': 'Country', name: 'Кыргызстан' },
     },
     {
       '@type': 'WebSite',

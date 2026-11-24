@@ -1,4 +1,6 @@
 import { categories } from '@/data/catalog';
+import { homeFaq } from '@/data/faq';
+import { categoryFromPrice } from '@/lib/prices';
 import { formatPrice, productHref, productsByCategory } from '@/data/products';
 import { ADDRESS, PHONES, WORK_HOURS } from '@/data/contacts';
 import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
@@ -35,6 +37,14 @@ export function GET() {
       lines.push(`- [${product.name}](${SITE_URL}${productHref(product)}): ${priceText}`);
     }
   }
+
+  const faq = homeFaq({
+    washer: categoryFromPrice('washer')?.price,
+    bath: categoryFromPrice('bath')?.price,
+    foundation: categoryFromPrice('foundation')?.price,
+  });
+  lines.push('', '## Частые вопросы', '');
+  for (const item of faq) lines.push(`- ${item.q} ${item.a}`);
 
   return new Response(lines.join('\n') + '\n', {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },

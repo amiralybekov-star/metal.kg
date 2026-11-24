@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { SITE_NAME, SITE_URL } from '@/data/site';
 import type { Product } from '@/data/products';
 import { productAlt } from '@/data/products';
+import { productSummary } from '@/lib/productText';
 import type { Category, Faq } from '@/data/catalog';
 
 type Crumb = { name: string; url: string };
@@ -84,7 +85,12 @@ export function productLd(product: Product, category: Category) {
       : undefined;
 
   const additionalProperty = [
-    product.diameter && { '@type': 'PropertyValue', name: 'Диаметр', value: product.diameter },
+    product.diameter && {
+      '@type': 'PropertyValue',
+      name: 'Диаметр арматуры',
+      value: product.diameter.replace('d-', ''),
+      unitText: 'мм',
+    },
     product.size && { '@type': 'PropertyValue', name: 'Размер', value: product.size },
     product.unit && { '@type': 'PropertyValue', name: 'Единица', value: product.unit },
   ].filter(Boolean);
@@ -94,7 +100,7 @@ export function productLd(product: Product, category: Category) {
     '@type': 'Product',
     '@id': `${url}#product`,
     name: product.name,
-    description: product.description ?? `${product.name} — производство в Бишкеке`,
+    description: productSummary(product, category)[0],
     image: [`${SITE_URL}${product.image}`],
     url,
     sku: product.slug,

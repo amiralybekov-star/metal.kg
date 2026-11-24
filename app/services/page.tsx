@@ -6,6 +6,7 @@ import PhoneLink from '@/components/PhoneLink';
 import { PHONES } from '@/data/contacts';
 import { SITE_URL } from '@/data/site';
 import { pageOpenGraph } from '@/lib/seo';
+import { Factory, MapPin, Timer } from '@phosphor-icons/react/dist/ssr';
 
 export const metadata: Metadata = {
   title: 'Изготовление металлоизделий и плазменная резка, Бишкек',
@@ -55,9 +56,9 @@ const services = [
 ];
 
 const advantages = [
-  { icon: '🏭', text: 'Собственное производство' },
-  { icon: '📍', text: 'Склад и цех в Бишкеке' },
-  { icon: '⚡', text: 'Быстрое изготовление' },
+  { Icon: Factory, text: 'Собственное производство' },
+  { Icon: MapPin, text: 'Склад и цех в Бишкеке' },
+  { Icon: Timer, text: 'Быстрое изготовление' },
 ];
 
 export default function ServicesPage() {
@@ -105,8 +106,8 @@ export default function ServicesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           {advantages.map((item) => (
             <div key={item.text}>
-              <div className="text-4xl mb-3" aria-hidden="true">
-                {item.icon}
+              <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-blue-800">
+                <item.Icon className="w-8 h-8" aria-hidden="true" />
               </div>
               <p className="font-medium text-lg">{item.text}</p>
             </div>
