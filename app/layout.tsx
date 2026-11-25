@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import MobileContactBar from '@/components/MobileContactBar';
 import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
 import { ADDRESS, PHONES, MAPS_URL, WHATSAPP_NUMBER } from '@/data/contacts';
 
@@ -118,7 +119,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body className={inter.className}>
+      <body className={`${inter.className} pb-[76px] md:pb-0`}>
         {/* Google tag (gtag.js) — реклама Google Ads */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18302346521"
@@ -143,6 +144,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="pb-6">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <MobileContactBar />
       </body>
     </html>
   );
