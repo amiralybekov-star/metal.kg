@@ -3,7 +3,7 @@ import ContactForm from '@/components/ContactForm';
 import WhatsAppLink from '@/components/WhatsAppLink';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 import PhoneLink from '@/components/PhoneLink';
-import { ADDRESS, MAP_EMBED_URL, PHONES, TWO_GIS_URL, WHATSAPP_NUMBER, WORK_HOURS } from '@/data/contacts';
+import { ADDRESS, MAP_EMBED_URL, PHONES, MAPS_URL, WHATSAPP_NUMBER, WORK_HOURS } from '@/data/contacts';
 import { SITE_URL } from '@/data/site';
 import { pageOpenGraph } from '@/lib/seo';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
@@ -83,12 +83,12 @@ export default function ContactsPage() {
               </WhatsAppLink>
 
               <a
-                href={TWO_GIS_URL}
+                href={MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-center border border-slate-300 hover:bg-slate-50 py-4 rounded-3xl font-medium"
               >
-                <span className="inline-flex items-center gap-1.5">Открыть на 2GIS<ArrowUpRight className="w-4 h-4" weight="bold" aria-hidden="true" /></span>
+                <span className="inline-flex items-center gap-1.5">Открыть в Google Картах<ArrowUpRight className="w-4 h-4" weight="bold" aria-hidden="true" /></span>
               </a>
             </div>
           </div>

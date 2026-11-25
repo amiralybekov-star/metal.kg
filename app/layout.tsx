@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
-import { ADDRESS, PHONES, TWO_GIS_URL, WHATSAPP_NUMBER } from '@/data/contacts';
+import { ADDRESS, PHONES, MAPS_URL, WHATSAPP_NUMBER } from '@/data/contacts';
 
 // Inter, ужатый до кириллицы + латиницы (120 КБ, оси 100–900).
 // Свой файл вместо next/font/google: сборка на Vercel падала на резолве
@@ -87,6 +87,7 @@ const jsonLd = {
         '@type': 'PostalAddress',
         streetAddress: ADDRESS.street,
         addressLocality: ADDRESS.city,
+        postalCode: ADDRESS.postalCode,
         addressRegion: ADDRESS.district,
         addressCountry: 'KG',
       },
@@ -99,7 +100,7 @@ const jsonLd = {
         },
       ],
       sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
-      hasMap: TWO_GIS_URL,
+      hasMap: MAPS_URL,
       areaServed: { '@type': 'Country', name: 'Кыргызстан' },
     },
     {
