@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { products } from "./data/products";
 
 /**
  * Preview-деплои Vercel не должны попадать в индекс: иначе копии страниц
@@ -17,7 +18,17 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   async redirects() {
+    // Старые адреса товаров /catalog/<id> (до перехода на /catalog/<категория>/<товар>)
+    // Google ещё показывает их в выдаче, а они отдавали 404. Номера id не менялись.
+    const legacyProducts = products.map((p) => ({
+      source: `/catalog/${p.id}`,
+      destination: `/catalog/${p.category}/${p.slug}`,
+      permanent: true,
+    }));
     return [
+      ...legacyProducts,
+      // Скрытая категория «Прочее» — ведём в общий каталог
+      { source: "/catalog/other", destination: "/catalog", permanent: true },
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.metal.kg" }],

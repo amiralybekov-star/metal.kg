@@ -281,10 +281,10 @@ export const products: Product[] = [
   {
     id: 15,
     slug: "tayrot",
-    name: "Тайрота (Тайрод)",
+    name: "Тайрот (тайрод, тяж опалубки)",
     category: "tie",
     unit: "шт",
-    description: "Различные диаметры и длины",
+    description: "Стяжной винт для опалубки: диаметр и длина под ваши щиты, резьба нарезается на станке",
     isOnOrder: true,
     price: 0,
     image: "/images/products/tajroty.jpg"
