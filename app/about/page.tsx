@@ -44,7 +44,8 @@ export default function AboutPage() {
           объект, и частники, которые строят свой дом. Продаём напрямую из цеха, без перекупщиков.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 pt-6">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 pt-6">Что есть в цеху</h2>
+        <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-slate-50 p-6 rounded-3xl">
             <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-700"><Factory className="w-7 h-7" aria-hidden="true" /></div>
             <h3 className="font-semibold text-xl mb-2">Плазма и лазер</h3>
