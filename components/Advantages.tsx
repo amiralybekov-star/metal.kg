@@ -1,31 +1,32 @@
+import { FOUNDING_YEAR, TEAM_SIZE } from '@/data/site';
 import { Factory, Ruler, Timer, Truck } from '@phosphor-icons/react/dist/ssr';
 
 export default function Advantages() {
   return (
     <section className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Коротко о цехе</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {[
             {
               Icon: Factory,
-              title: "Собственное производство",
-              text: "Цех и склад в Бишкеке: от металлопроката до готовой детали без посредников.",
+              title: `Свой цех с ${FOUNDING_YEAR} года`,
+              text: `${TEAM_SIZE}, плазма и лазер. Режем и варим сами, без перекупщиков.`,
             },
             {
               Icon: Timer,
-              title: "Быстрое изготовление",
-              text: "Стандартные позиции со склада, изделия на заказ — от 1 до 5 дней.",
+              title: "100–200 штук в день",
+              text: "Столько шайб или ванночек делаем за день. Нестандарт по чертежу за 1–5 дней.",
             },
             {
               Icon: Truck,
-              title: "Доставка по Кыргызстану",
-              text: "Самовывоз с Профсоюзной 2/1 или доставка по городу и регионам.",
+              title: "Склад на Профсоюзной 2/1",
+              text: "Забирайте сами или привезём по Бишкеку и регионам.",
             },
             {
               Icon: Ruler,
-              title: "Индивидуальные размеры",
-              text: "Изготовим по чертежу: диаметр, длина, отверстия, марка стали.",
+              title: "По вашему эскизу",
+              text: "Хватит рисунка от руки с размерами: диаметр, длина, отверстия.",
             },
           ].map((item) => (
             <div key={item.title} className="min-w-0 bg-white p-5 sm:p-8 rounded-3xl text-center card-hover">

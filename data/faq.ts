@@ -1,6 +1,6 @@
 import type { Faq } from './catalog';
 import { ADDRESS, WORK_HOURS_TEXT } from './contacts';
-import { FOUNDING_YEAR } from './site';
+import { CAPACITY, FOUNDING_YEAR, TEAM_SIZE } from './site';
 
 /**
  * Вопросы для главной и разметки FAQPage. Первая фраза ответа отвечает
@@ -38,7 +38,7 @@ export function homeFaq(prices: { washer?: number; bath?: number; foundation?: n
     },
     {
       q: 'Вы производитель или перепродаёте?',
-      a: `Производитель. Цех и склад у нас свои, работаем с ${FOUNDING_YEAR} года, поэтому продаём без наценки перекупщиков.`,
+      a: `Производитель. Цех и склад у нас свои, работаем с ${FOUNDING_YEAR} года. В цеху ${TEAM_SIZE}, режем на плазме и лазере, за день делаем ${CAPACITY}. Продаём без наценки перекупщиков.`,
     },
   ];
 }

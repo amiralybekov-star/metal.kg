@@ -3,7 +3,7 @@ import { homeFaq } from '@/data/faq';
 import { categoryFromPrice } from '@/lib/prices';
 import { formatPrice, productHref, productsByCategory } from '@/data/products';
 import { ADDRESS, PHONES, WORK_HOURS } from '@/data/contacts';
-import { CONTENT_UPDATED, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/data/site';
+import { CAPACITY, CONTENT_UPDATED, EQUIPMENT, FOUNDING_YEAR, SITE_NAME, SITE_TAGLINE, SITE_URL, TEAM_SIZE } from '@/data/site';
 
 // /llms.txt — краткое описание сайта для языковых моделей (https://llmstxt.org/).
 // Собирается из тех же данных, что и каталог, поэтому обновлять руками не нужно.
@@ -13,7 +13,7 @@ export function GET() {
   const lines: string[] = [
     `# ${SITE_NAME} — ${SITE_TAGLINE}`,
     '',
-    `> Собственное производство строительных металлоизделий в Бишкеке с ${FOUNDING_YEAR} года: анкерные болты и шпильки, анкерные шайбы АШ, ванночки для сварки, тайроты, муфты для арматуры, закладные детали, телескопические стойки. Цены от производителя, опт и розница, изготовление по чертежам, самовывоз и доставка по Кыргызстану.`,
+    `> Собственное производство строительных металлоизделий в Бишкеке с ${FOUNDING_YEAR} года: анкерные болты и шпильки, анкерные шайбы АШ, ванночки для сварки, тайроты, муфты для арматуры, закладные детали, телескопические стойки. Цех на ${TEAM_SIZE}, ${EQUIPMENT}, за день ${CAPACITY}. Опт и поштучно, изготовление по чертежам, самовывоз и доставка по Кыргызстану.`,
     '',
     `- Адрес: ${ADDRESS.street}, ${ADDRESS.city}, ${ADDRESS.country}`,
     `- Телефоны: ${PHONES.map((p) => p.display).join(', ')} (WhatsApp)`,

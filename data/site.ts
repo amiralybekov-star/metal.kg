@@ -6,6 +6,11 @@ export const SITE_NAME = 'ИП Райымжанов';
 /** Год основания — для текстов и разметки LocalBusiness.foundingDate */
 export const FOUNDING_YEAR = '2009';
 
+/** Факты о цехе со слов владельца (ноябрь 2026) */
+export const TEAM_SIZE = '6–7 человек';
+export const EQUIPMENT = 'плазменная и лазерная резка';
+export const CAPACITY = 'от 100 до 200 шайб или ванночек';
+
 export const SITE_TAGLINE = 'Производство металлоизделий в Бишкеке';
 
 /**

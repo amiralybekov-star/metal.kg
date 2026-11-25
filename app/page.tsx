@@ -10,6 +10,7 @@ import FaqList from '@/components/FaqList';
 import { homeFaq } from '@/data/faq';
 import { categoryFromPrice } from '@/lib/prices';
 import { faqLd } from '@/lib/seo';
+import { CAPACITY, FOUNDING_YEAR, TEAM_SIZE } from '@/data/site';
 import { ArrowRight, Check, CheckCircle } from '@phosphor-icons/react/dist/ssr';
 
 export default function Home() {
@@ -105,8 +106,9 @@ export default function Home() {
           </h2>
 
           <p className="text-[17px] sm:text-lg leading-relaxed mb-10">
-            <strong>ИП Райымжанов</strong> — современное производственное предприятие в Бишкеке,
-            специализирующееся на изготовлении высококачественного строительного крепежа и металлоизделий.
+            <strong>ИП Райымжанов</strong> — небольшой цех в Бишкеке на Профсоюзной 2/1. Работаем
+            с {FOUNDING_YEAR} года, в цеху {TEAM_SIZE}, металл режем плазмой и лазером. За день
+            делаем {CAPACITY}.
           </p>
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Что мы производим</h3>
@@ -120,35 +122,18 @@ export default function Home() {
             <li className="flex items-start gap-2.5"><Check className="w-5 h-5 mt-1 flex-shrink-0 text-emerald-600" weight="bold" aria-hidden="true" /><span>Стойки телескопические для опалубки</span></li>
           </ul>
 
-          <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Почему выбирают нас</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
-              <h4 className="font-semibold text-lg sm:text-xl mb-2">Собственное производство</h4>
-              <p className="text-slate-600 text-[15px] sm:text-base">Полный цикл изготовления в Бишкеке. Работаем с 2009 года.</p>
-            </div>
-            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
-              <h4 className="font-semibold text-lg sm:text-xl mb-2">Выгодные цены</h4>
-              <p className="text-slate-600 text-[15px] sm:text-base">Цена формируется на производстве — без наценки посредников и перекупщиков.</p>
-            </div>
-            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100">
-              <h4 className="font-semibold text-lg sm:text-xl mb-2">Быстрые сроки</h4>
-              <p className="text-slate-600 text-[15px] sm:text-base">Стандартные позиции в наличии, изделия на заказ — от 1 до 5 дней.</p>
-            </div>
-          </div>
-
           <p className="text-[17px] sm:text-lg leading-relaxed mb-10">
-            Мы обеспечиваем строительные компании, подрядчиков и частных застройщиков
-            крепежом по всей территории Кыргызстана. Стандартные изделия изготавливаем
-            по ГОСТ, нестандартные — по чертежам и размерам заказчика.
+            Берут у нас и строительные компании, которым нужна партия на объект, и частники, которым
+            нужен десяток шайб на свой дом. Стандартное делаем по ГОСТ, остальное по вашему чертежу
+            или эскизу.
           </p>
 
           <h3 className="text-2xl sm:text-3xl mt-10 mb-5">Условия работы</h3>
           <ul className="space-y-3 text-[17px] sm:text-lg mb-12">
-            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Изготовление по ГОСТ и ТУ, нестандарт — по чертежу</span></li>
-            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Изготовление по вашим чертежам и размерам</span></li>
-            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Оптовые поставки крупным объектам</span></li>
-            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Самовывоз со склада в Бишкеке (Профсоюзная 2/1)</span></li>
-            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Возможность бартера</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>По ГОСТ и ТУ, нестандарт по вашему чертежу</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Поштучно для частников, партиями для объектов</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Самовывоз со склада на Профсоюзной 2/1, доставка по Бишкеку и регионам</span></li>
+            <li className="flex items-start gap-3"><CheckCircle className="w-6 h-6 mt-0.5 flex-shrink-0 text-emerald-600" aria-hidden="true" /><span>Оплата наличными, есть бартер</span></li>
           </ul>
 
           {/* Частые вопросы: видимый текст + разметка FAQPage для поиска и ИИ-ответов */}
@@ -166,7 +151,7 @@ export default function Home() {
             <p className="text-xl sm:text-2xl font-semibold leading-tight mb-3">
               Нужны анкерные болты, шайбы или закладные детали в Бишкеке?
             </p>
-            <p className="text-lg sm:text-xl text-slate-600 mb-6">Звоните или пишите — ответим оперативно!</p>
+            <p className="text-lg sm:text-xl text-slate-600 mb-6">Позвоните, скажем, что есть на складе сегодня.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <WhatsAppLink
                 source="home_cta"
