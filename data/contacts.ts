@@ -17,7 +17,12 @@ export const WORK_HOURS = 'Пн — Сб: 08:00 — 18:00';
 /** То же, для связного текста */
 export const WORK_HOURS_TEXT = 'с понедельника по субботу, с 8:00 до 18:00';
 
-export const TWO_GIS_URL = 'https://2gis.kg/bishkek/geo/15763234351075282';
+/**
+ * Ссылка на 2GIS. Прежний geo-id открывал Профсоюзную 110/2, поэтому пока
+ * ищем по точному адресу. Когда будет ссылка на карточку фирмы в 2GIS
+ * («Поделиться» в карточке), поставьте её сюда и верните в sameAs (app/layout.tsx).
+ */
+export const TWO_GIS_URL = `https://2gis.kg/bishkek/search/${encodeURIComponent('Профсоюзная 2/1')}`;
 
 export const MAP_EMBED_URL =
   'https://www.google.com/maps?q=%D0%9F%D1%80%D0%BE%D1%84%D1%81%D0%BE%D1%8E%D0%B7%D0%BD%D0%B0%D1%8F+2%2F1,+%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA,+%D0%9A%D1%8B%D1%80%D0%B3%D1%8B%D0%B7%D1%81%D1%82%D0%B0%D0%BD&output=embed';

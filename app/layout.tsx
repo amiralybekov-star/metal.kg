@@ -98,7 +98,7 @@ const jsonLd = {
           closes: '18:00',
         },
       ],
-      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`, TWO_GIS_URL],
+      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
       hasMap: TWO_GIS_URL,
       areaServed: { '@type': 'Country', name: 'Кыргызстан' },
     },
